@@ -1,0 +1,29 @@
+:root {
+  font: 16px/1.5 system-ui, sans-serif;
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+}
+
+main {
+  padding: 16px;
+}
+
+aside {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  padding: 16px;
+  border-left: 1px solid #ccc;
+}
