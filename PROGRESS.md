@@ -1,3 +1,4 @@
 # PROGRESS
 
 - M0-1 应用骨架：完成。React+Vite+TS 单页骨架，`store/uiStore.ts`（Zustand，`currentView` + `viewState{camera,mode}` + 三辐条抽屉开关），5 个独立屏占位（home/①/⑤/⑥/⑬）+ 活画布 4 个相机档占位 + ⑦三辐条抽屉。验收闸通过：独立屏切换、相机档切换、抽屉开关均正确变更 view-state；浏览器自动化验证 URL 全程不变（`urlsSeenCount: 1`）；`package.json`/`package-lock.json` 无任何路由库；刷新后回落默认视图（M0-1 未接持久化，符合预期）；`npm run build`/`npm run lint` 均过。
+- M0-2 持久化层：完成。`src/repo/Repository.ts`（纯接口，零 Dexie 类型）+ `DexieRepository.ts`（Dexie 实现，仅声明 `assets/registry/projects` 三通用表，铁律2）+ `MapRepository.ts`（内存实现，证抽象）+ `migrate.ts`（版本号+升级钩子骨架）+ `index.ts`（导出单例 `repo`，默认 Dexie）+ `match.ts`/`tables.ts`（两实现共用的过滤/表名校验逻辑）。验收闸通过：浏览器内临时测试 save 1000 条 + get/query(作用域filter)/list(含/不含scope)/delete 全部正确（真实 IndexedDB，非 polyfill）；将 `repo/index.ts` 临时切到 `MapRepository` 后，同一份临时测试代码不改一行重跑仍全部通过，证明仓储抽象成立，随后切回 Dexie；静态 grep 确认全库仅 `DexieRepository.ts` 一处 `import Dexie`、零 `localStorage`；`npm run build`/`npm run lint` 均过；临时测试文件已删除未提交。
